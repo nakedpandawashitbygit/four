@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Если файл или директория существует, не выполнять перенаправление
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Перенаправление всех запросов к r.php
+RewriteRule ^(.*)$ r.php?url=$1 [L,QSA]
+
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+</IfModule>
