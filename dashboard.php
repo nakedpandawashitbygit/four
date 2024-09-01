@@ -140,7 +140,7 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
         <input type="text" name="long_url" placeholder="Введите длинную ссылку" required>
         <input type="datetime-local" name="expiration_date" placeholder="Срок действия (необязательно)">
         <input type="password" name="link_password" placeholder="Пароль для ссылки (необязательно)">
-        <button type="submit">Генерация короткой ссылки</button>
+        <button type="submit">Генерация</button>
     </form>
 
     <h2>Ваши ссылки</h2>
