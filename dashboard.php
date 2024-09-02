@@ -99,6 +99,8 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         h1 { color: #333; }
+        h2 { color: #333; }
+        h3 { color: #333; }
         form { margin-bottom: 20px; }
         input, button { padding: 10px; margin: 5px 0; }
         .link-container {
@@ -120,7 +122,7 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
             display: flex;
             flex-direction: column;
         }
-        .short-url, .long-url {
+        .short-url, .long-url, .expiration_date, .password {
             margin: 5px 0;
         }
         .actions {
@@ -138,13 +140,15 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
     </style>
 </head>
 <body>
+    
     <h1>Личный кабинет</h1>
+    <h3>Для ссылки задаётся уникальный ID, которому выдаётся короткая ссылка и QR-код</h3>
     
     <form method="POST">
-        <input type="text" name="long_url" placeholder="Введите длинную ссылку" required>
+        <input type="text" name="long_url" placeholder="Введите ссылку" required>
         <input type="datetime-local" name="expiration_date" placeholder="Срок действия (необязательно)">
         <input type="password" name="link_password" placeholder="Пароль (необязательно)">
-        <button type="submit">Генерация</button>
+        <button type="submit">Сделать</button>
     </form>
 
     <h2>Ваши ссылки</h2>
@@ -155,30 +159,37 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
                     <img src="qrcodes/<?php echo $row['id']; ?>.png" alt="QR-код для ссылки <?php echo $row['id']; ?>" />
                 </div>
                 <div class="link-info">
-                    <div class="short-url">
-                        <strong>Короткая ссылка:</strong> <span class="short-url-text"><?php echo $row['short_url']; ?></span>
-                        <input type="text" class="edit-input" placeholder="Введите новую короткую ссылку" />
-                        <button class="save-btn" onclick="saveEdit(<?php echo $row['id']; ?>, this)">Сохранить</button>
-                    </div>
-                    <div class="long-url">
-                        <strong>Длинная ссылка:</strong> <span class="long-url-text"><?php echo $row['long_url']; ?></span>
-                        <input type="text" class="edit-input" placeholder="Введите новую длинную ссылку" />
-                        <button class="save-btn" onclick="saveEdit(<?php echo $row['id']; ?>, this)">Сохранить</button>
-                    </div>
-                    <?php if ($row['expiration_date']): ?>
-                        <div class="expiration-date">
-                            <strong>Срок действия:</strong> <?php echo $row['expiration_date']; ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if ($row['password']): ?>
-                        <div class="link-password">
-                            <strong>Пароль для доступа:</strong> <?php echo $row['password']; ?>
-                        </div>
-                    <?php endif; ?>
-                    <div class="actions">
-                        <a href="dashboard.php?delete=<?php echo $row['id']; ?>&short_url=<?php echo $row['short_url']; ?>" class="delete-btn">Удалить</a>
-                        <button type="button" class="edit-btn" onclick="showEditForm(<?php echo $row['id']; ?>, '<?php echo $row['long_url']; ?>', '<?php echo $row['short_url']; ?>', this)">Редактировать</button>
-                    </div>
+                <div class="short-url">
+                <strong>Короткая ссылка:</strong>
+                <span class="short-url-text"><a href="http://h406470147.nichost.ru/<?php echo $row['short_url']; ?>" target="_blank">http://h406470147.nichost.ru/<?php echo $row['short_url']; ?> </a></span>
+                <input type="text" class="edit-input" placeholder="Введите новую короткую ссылку" />
+                <button class="save-btn" onclick="saveEdit(<?php echo $row['id']; ?>, this)">Сохранить</button>
+                </div>
+                    
+                <div class="long-url">
+                <strong>Длинная ссылка:</strong>
+                <span class="long-url-text"><a href="<?php echo $row['long_url']; ?>" target="_blank"><?php echo $row['long_url']; ?> </a></span>
+                <input type="text" class="edit-input" placeholder="Введите новую длинную ссылку" />
+                <button class="save-btn" onclick="saveEdit(<?php echo $row['id']; ?>, this)">Сохранить</button>
+                </div>
+                
+                <?php if ($row['expiration_date']): ?>
+                <div class="expiration-date">
+                <strong>Срок действия:</strong> <?php echo $row['expiration_date']; ?>
+                </div>
+                <?php endif; ?>
+                
+                <?php if ($row['password']): ?>
+                <div class="link-password">
+                <strong>Пароль для доступа:</strong> <?php echo $row['password']; ?>
+                </div>
+                <?php endif; ?>
+                
+                <div class="actions">
+                <a href="dashboard.php?delete=<?php echo $row['id']; ?>&short_url=<?php echo $row['short_url']; ?>" class="delete-btn">Удалить</a>
+                <button type="button" class="edit-btn" onclick="showEditForm(<?php echo $row['id']; ?>, '<?php echo $row['long_url']; ?>', '<?php echo $row['short_url']; ?>', this)">Редактировать</button>
+                </div>
+                
                 </div>
             </div>
         <?php endwhile; ?>
