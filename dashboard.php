@@ -9,6 +9,9 @@ if ($conn->connect_error) {
     die("Ошибка подключения: " . $conn->connect_error);
 }
 
+// Удаление истекших ссылок
+$conn->query("DELETE FROM four WHERE expiration_date IS NOT NULL AND expiration_date <= NOW()");
+
 // Обработка удаления ссылки
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
@@ -31,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $id = $_POST['edit_id'];
     $new_long_url = $_POST['new_long_url'];
     $new_short_url = $_POST['new_short_url'];
+    //$new_password = $_POST['new_password'];
 
     // Проверка на уникальность короткой ссылки
     $stmt = $conn->prepare("SELECT COUNT(*) FROM four WHERE short_url = ? AND id != ?");
@@ -139,7 +143,7 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
     <form method="POST">
         <input type="text" name="long_url" placeholder="Введите длинную ссылку" required>
         <input type="datetime-local" name="expiration_date" placeholder="Срок действия (необязательно)">
-        <input type="password" name="link_password" placeholder="Пароль для ссылки (необязательно)">
+        <input type="password" name="link_password" placeholder="Пароль (необязательно)">
         <button type="submit">Генерация</button>
     </form>
 
