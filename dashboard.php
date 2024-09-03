@@ -3,6 +3,19 @@ session_start();
 require_once 'config.php';
 require_once 'functions.php';
 
+// Проверка авторизации 1
+//if (!isset($_SESSION['user_id'])) {
+//echo "<h2>Вы не авторизованы.</h2>";
+//echo "<p><a href='login.php'>Войти</a> или <a href='register.php'>Зарегистрироваться</a></p>";
+//exit(); // Прекращаем выполнение скрипта, если пользователь не авторизован
+//}
+
+// Проверка авторизации 2
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -142,6 +155,11 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
 <body>
     
     <h1>Личный кабинет</h1>
+    
+    <div>
+        <a href="logout.php" class="logout-btn">Выйти</a> <!-- Кнопка выхода -->
+    </div>
+    
     <h3>Для ссылки задаётся уникальный ID, которому выдаётся короткая ссылка и QR-код</h3>
     
     <form method="POST">
@@ -184,6 +202,11 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
                 <strong>Пароль для доступа:</strong> <?php echo $row['password']; ?>
                 </div>
                 <?php endif; ?>
+                
+                <div class="click-count">
+                <strong>Количество переходов по QR-коду:</strong> <?php echo $row['qr_count']; ?>
+                <strong>Количество переходов по короткой ссылке:</strong> <?php echo $row['short_count']; ?>
+                </div>
                 
                 <div class="actions">
                 <a href="dashboard.php?delete=<?php echo $row['id']; ?>&short_url=<?php echo $row['short_url']; ?>" class="delete-btn">Удалить</a>
