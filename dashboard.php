@@ -132,41 +132,65 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
     </div>
   </nav>
   
-  <div class="container mt-5">
-    <h1 class="text-center">ltl.link</h1>
+<div class="container mt-5">
 
     <!-- Форма создания новой ссылки -->
     <div class="mb-4">
-      <form method="POST" action="dashboard.php">
-        <div class="mb-3">
-          <label for="long_url" class="form-label">URL</label>
-          <input type="text" class="form-control" id="long_url" name="long_url" placeholder="Введите ссылку" required>
-        </div>
-        <div class="mb-3">
-          <label for="title" class="form-label">Название</label>
-          <input type="text" class="form-control" id="title" name="title" placeholder="Введите название">
-        </div>
-        <div class="mb-3">
-          <label for="comment" class="form-label">Комментарий</label>
-          <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Введите комментарий"></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="expiration_date" class="form-label">Дата истечения срока</label>
-          <input type="datetime-local" class="form-control" id="expiration_date" name="expiration_date">
-        </div>
-        <div class="mb-3">
-          <label for="link_password" class="form-label">Пароль</label>
-          <input type="password" class="form-control" id="link_password" name="link_password" placeholder="Пароль (необязательно)">
-        </div>
-        <button type="submit" class="btn btn-primary">Создать</button>
-      </form>
+    <form method="POST" action="dashboard.php" class="d-flex">
+    <input type="text" class="form-control me-2" id="long_url" name="long_url" placeholder="Введите ссылку" required>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <!-- </form> -->
     </div>
 
+        <!-- Тумблеры вызова доп.настроек -->
+        <div class="mb-3 d-flex align-items-center">
+        <div class="form-check form-switch me-3">
+        <input class="form-check-input" type="checkbox" id="toggleTitle" onchange="toggleField('title')">
+        <label class="form-check-label" for="toggleTitle">Добавить название</label>
+        </div>
+        <div class="form-check form-switch me-3">
+        <input class="form-check-input" type="checkbox" id="toggleExpiration" onchange="toggleField('expiration_date')">
+        <label class="form-check-label" for="toggleExpiration">Дата истечения срока</label>
+        </div>
+        <div class="form-check form-switch me-3">
+        <input class="form-check-input" type="checkbox" id="togglePassword" onchange="toggleField('link_password')">
+        <label class="form-check-label" for="togglePassword">Пароль</label>
+        </div>
+        <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="toggleComment" onchange="toggleField('comment')">
+        <label class="form-check-label" for="toggleComment">Комментарий</label>
+        </div>
+        </div>
+
+        <!-- Поля для скрытия -->
+        <div id="titleField" class="mb-3" style="display:none;">
+        <label for="title" class="form-label">Название</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Введите название">
+        </div>
+        <div id="expirationField" class="mb-3" style="display:none;"> <!-- Изменено с "expiration_dateField" на "expirationField" -->
+        <label for="expiration_date" class="form-label">Дата истечения срока</label>
+        <input type="datetime-local" class="form-control" id="expiration_date" name="expiration_date">
+        </div>
+        <div id="passwordField" class="mb-3" style="display:none;"> <!-- Изменено с "link_passwordField" на "passwordField" -->
+        <label for="link_password" class="form-label">Пароль</label>
+        <input type="password" class="form-control" id="link_password" name="link_password" placeholder="Введите пароль">
+        </div>
+        <div id="commentField" class="mb-3" style="display:none;">
+        <label for="comment" class="form-label">Комментарий</label>
+        <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Введите комментарий"></textarea>
+        </div>
+
+
+        </form>
+        </div>
+
      <!-- User Links Section -->
-      <h2 class="mb-4">Ваши ссылки</h2>
+      
+      <div class="container">
+          
       <div class="row">
         <?php while ($row = $result->fetch_assoc()): ?>
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="card mb-3">
               <div class="card-body">
                 <div class="d-flex">
@@ -204,10 +228,13 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
                   </form>
                 </div>
               </div>
+              
             </div>
           </div>
+
         <?php endwhile; ?>
       </div>
+    </div>
     </div>
 
   <!-- Bootstrap JS -->
@@ -224,6 +251,28 @@ $result = $conn->query("SELECT * FROM four WHERE user_id = $user_id ORDER BY cre
       }
     }
   </script>
+  
+<script>
+  function toggleField(field) {
+  let fieldDiv;
+
+  // Корректируем соответствие между тумблерами и полями
+  switch(field) {
+    case 'expiration_date':
+      fieldDiv = document.getElementById('expirationField');
+      break;
+    case 'link_password':
+      fieldDiv = document.getElementById('passwordField');
+      break;
+    default:
+      fieldDiv = document.getElementById(field + 'Field');
+      break;
+  }
+  
+  fieldDiv.style.display = fieldDiv.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+  
 </body>
 </html>
 
