@@ -1,0 +1,562 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+#loading-overlay-global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    color: black;
+    font-size: 24px;
+	text-align: center;
+	padding-top: 20%;
+}
+
+.edit-overlay-card {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.8);
+	z-index: 9999;
+	text-align: center;
+	border-top-left-radius: .29rem;
+	border-top-right-radius: .29rem;
+}
+
+.edit-overlay-expiration,
+.edit-overlay-password {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.8);
+	z-index: 9999;
+	text-align: center;
+}
+
+.user-icon {
+	width: 40px;
+	height: 40px;
+	background-color: #0c6efc;
+	border-radius: 50%;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;
+	font-weight: bold;
+	color: #000;
+}
+
+.card-buttons {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.card {
+	position: relative;
+	/*padding-top: 1px;*/
+	border: 1px solid #212529;
+}
+
+.card-short-url {
+    font-size:1.5rem;
+}
+
+.short-url-input {
+	width: 200px;
+}
+.title-input,
+.long-url-input,
+.password-input,
+.password-input-group {
+	width: 60%;
+}
+
+.card-content .card-subtitle {
+    font-size: .8rem;
+    color: #808080;
+    margin-bottom: 1rem;
+}
+.card-content .card-subtitle:last-child {
+    margin-bottom: 0;
+}
+
+.card-text {
+    margin-bottom: .2rem;
+}
+
+.expiration-link, .password-link {
+	cursor: pointer;
+}
+/*.short-url-input {
+	flex: 0 1 100px;
+}*/
+
+/*
+.card-footer .list-group-item {
+    background-color: transparent;
+}
+.card-footer .list-group-item:not(:last-child) {
+    border-right: 1px solid #212529 !important;
+}
+.card-footer .list-group-item p {
+    margin-bottom: .2rem;
+}
+.card-footer-value {
+    font-weight: bold;
+}
+.card-footer .card-subtitle {
+    margin-bottom: 0;
+}
+*/
+
+/* Сделал немного стиля для того чтобы после редактирвоания кнопки не прыгали в столбик */
+
+.card-buttons {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	gap: 10px;
+	/* Добавляем зазор между кнопками */
+}
+
+.card-buttons button,
+.card-buttons a {
+	flex-shrink: 0;
+	/* Предотвращаем изменение размеров кнопок */
+}
+
+.card-buttons button,
+.card-buttons a {
+	display: inline-block;
+	white-space: nowrap;
+	/* Отключаем перенос текста внутри кнопок */
+}
+
+#utmFields div {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:.5rem;
+}
+#utmFields div label {
+    text-align:right;
+}
+#utmFields div label:after { 
+    content: ":";
+}
+#utmFields .form-label {
+    margin-top: .4rem;
+}
+
+.btn-toggle-password-visibility {
+	background: #fff;
+	border: 1px solid #ced4da;
+	border-left: none;
+}
+.btn-toggle-password-visibility:hover {
+	border: 1px solid #ced4da;
+	background-color: #e0e0e0;
+}
+
+/* Styles for dashboard content columns*/
+
+.builder-form {
+	padding-right: 0 !important;
+}
+.builder-form .container {
+	padding-right: 0;
+}
+
+.builder-form, .links-cards {
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 1200px) {
+	.builder-form {
+		padding-right: 12px !important;
+	}
+	.builder-form .container {
+		padding-right: 20px !important;
+	}
+}
+/*
+@media (max-width: 768px) {
+
+	.builder-form,
+	.links-cards {
+		flex: 1 0 100% !important;
+	}
+	.builder-form {
+		padding-right: 20px;
+	}
+	.builder-form .container {
+		padding-right: 12px;
+	}
+}*/
+
+/* Base styles for large screens */
+#dasboard-content {
+    flex: 1;
+    overflow: hidden;
+    margin-left: 250px;
+    display: flex;
+}
+
+.builder-form {
+    flex: 0 0 40%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Only scroll if content exceeds height */
+}
+
+.links-cards {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 1200px) {
+    #dasboard-content {
+        flex-direction: column; /* Stack vertically on smaller screens */
+        overflow: visible; /* Ensure content can expand */
+    }
+
+    .builder-form {
+        flex: 0 1 auto; /* Auto height based on content */
+        padding-right: 20px;
+        padding-bottom: 10px; /* Add space below the form */
+    }
+
+    .links-cards {
+        flex: 0 1 auto; /* Allow the links-cards to follow the form */
+        overflow-y: auto; /* Enable scrolling for overflow */
+    }
+}
+
+/* Styles for Sidebar */
+
+#sidebar {
+	/*flex: 0 0 250px;*/
+    min-width: 250px;
+    max-width: 250px;
+	/*Fixed Sidebar*/
+	position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    /* don't forget to add all the previously mentioned styles here too */
+    background: #e0f3ff;
+    /*color: #fff;*/
+    transition: all 0.3s;
+	border-right: 1px solid #212529;
+}
+
+#sidebar a[data-toggle="collapse"] {
+    position: relative;
+}
+
+#sidebar .dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 1024px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+	#dasboard-content {
+		margin-left: 0px;
+	}
+}*/
+
+/* ADDITIONAL DEMO STYLE, NOT IMPORTANT TO MAKE THINGS WORK BUT TO MAKE IT A BIT NICER :) */
+/*@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";*/
+
+
+/*body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}*/
+
+#sidebar .sidebar-header h3 {
+	opacity: 1;
+    transition: opacity 0.3s ease-in-out 0.15s;
+}
+
+#sidebar p {
+    /*font-family: 'Poppins', sans-serif;*/
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7em;
+    /*color: #999;*/
+}
+
+#sidebar a,
+#sidebar a:hover,
+#sidebar a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+	height:85px;
+    background: #F00CFC;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    /*border-bottom: 1px solid #47748b;*/
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+	height: 50px;
+    padding: 10px 10px 10px 20px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a img {
+	width: 27px;
+	height: 27px;
+    margin-right: 5px;
+}
+#sidebar ul li a:hover {
+    /*color: #7386D5;*/
+    background: #f4fbff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    /*color: #fff;*/
+    background: #b9e4ff;
+}
+#sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+#sidebar ul li a span {
+    display: inline;
+	opacity: 1;
+    transition: opacity 0.3s ease-in-out 0.2s;
+}
+
+/* Sidebar 80px*/
+
+#sidebar.active {
+	min-width: 80px;
+    max-width: 80px;
+    margin-left: 0px;
+}
+
+/*#sidebar .sidebar-header strong {
+    display: none;
+}*/
+#sidebar.active .sidebar-header h3 {
+    /*display: none;*/
+	opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+/*#sidebar.active .sidebar-header strong {
+    display: block;
+}*/
+#sidebar ul li a {
+    text-align: left;
+}
+
+#sidebar.active ul li a {
+    /*padding: 20px 10px;
+    text-align: center;*/
+    font-size: 0.85em;
+}
+
+#sidebar.active ul li a img {
+    /*width: 33px;
+	height: 33px;*/
+    margin: 0 auto;
+}
+#sidebar.active ul li a span {
+    /*display: none;*/
+	opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+
+/* Same dropdown links padding*/
+#sidebar.active ul ul a {
+    padding: 10px !important;
+}
+
+/* Changing the arrow position to bottom center position, translateX(50%) works with right: 50% to accurately center the arrow */
+#sidebar.active .dropdown-toggle::after {
+    top: auto;
+    bottom: 10px;
+    right: 50%;
+    -webkit-transform: translateX(50%);
+    -ms-transform: translateX(50%);
+    transform: translateX(50%);
+}
+
+@media (max-width: 768px) {
+    /* 80px and its content aligned to centre. Pushing it off the screen with the negative left margin */
+    #sidebar.active {
+        min-width: 80px;
+        max-width: 80px;
+        text-align: center;
+        margin-left: -80px !important;
+    }
+
+    /* Reappearing the sidebar on toggle button click */
+    /*#sidebar {
+        margin-left: 0; 
+    }*/
+
+
+    /* Toggling the sidebar header content, hide the big heading [h3] and showing the small heading [strong] and vice versa */
+    #sidebar .sidebar-header strong {
+        display: none;
+    }
+    #sidebar.active .sidebar-header h3 {
+        display: none;
+    }
+    #sidebar.active .sidebar-header strong {
+        display: block;
+    }
+
+    /* Downsize the navigation links font size */
+    #sidebar.active ul li a {
+        padding: 20px 10px;
+        font-size: 0.85em;
+    }
+
+    #sidebar.active ul li a i {
+        margin-right:  0;
+        display: block;
+        font-size: 1.8em;
+        margin-bottom: 5px;
+    }
+
+    /* Adjust the dropdown links padding*/
+    #sidebar.active ul ul a {
+        padding: 10px !important;
+    }
+
+    /* Changing the arrow position to bottom center position, translateX(50%) works with right: 50% to accurately center the arrow */
+    .dropdown-toggle::after {
+        top: auto;
+        bottom: 10px;
+        right: 50%;
+        -webkit-transform: translateX(50%);
+        -ms-transform: translateX(50%);
+        transform: translateX(50%);
+    }
+}
+
+#sidebar-collapse img {
+	
+}
+
+/* Dashboard content */
+
+#dasboard-content {
+	transition: all 0.3s;
+}
+.card-text button {
+    padding: .3rem .3rem;
+}
+.button-icon {
+	width: 21px;
+	height: 17px;
+}
+
+.card-footer {
+	margin-top: 10px;
+	/*padding: 0 1rem;*/
+	padding: 0;
+	text-align: left;
+	font-size: 12px;
+	color: #999;
+	background: #e0f3ff;
+	border-top: 1px solid #212529;
+	/*border-radius: .25rem;*/
+}
+
+.card-footer .grid-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* 3 columns */
+	grid-template-rows: auto auto; /* 2 rows */
+	/*gap: 10px; /* Gap between grid items */
+}
+
+
+/* Specific styles for mobile */
+@media (max-width: 768px) {
+	.card-footer .grid-container {
+		grid-template-columns: 1fr; /* Single column for mobile */
+		grid-template-rows: repeat(6, auto); /* 6 rows for each item */
+	}
+}
+
+.card-footer .grid-item {
+	padding: 10px;
+}
+.card-footer .card-text {
+	font-weight: 700;
+}
+
+.card-footer .grid-item:not(:last-child) {
+    border-right: 1px solid #212529;
+}
+.card-footer .password {
+	border-right: none !important;
+}
+
+.card-footer .expiration,
+.card-footer .password {
+	padding: .8rem 1rem;
+	border-bottom: 1px solid #212529 !important;
+}
+
+.card-footer .short-url-created,
+.card-footer .short-url-hits,
+.card-footer .qr-code-hits {
+	padding: 10px;
+	/*background-color: #f8f9fa;*/
+	/*border-radius: 4px;*/
+}
+
+.card-footer .short-url-created {
+	border-bottom-left-radius: .25rem;
+}
+.card-footer .qr-code-hits {
+	border-bottom-right-radius: .25rem;
+}
