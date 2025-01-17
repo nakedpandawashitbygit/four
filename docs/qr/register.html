@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+</head>
+<body>
+    <button onclick="window.location.href='index.php'">На главную</button>
+    <button onclick="window.location.href='login.html'">Войти</button>
+
+    <h1>Регистрация</h1>
+    <form id="registerForm">
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Предотвращаем стандартное поведение формы
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            register(username, password); // Вызываем функцию регистрации
+        });
+    </script>
+</body>
+</html>

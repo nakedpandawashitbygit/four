@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Перенаправление для dashboard
+RewriteRule ^dashboard/?$ dashboard_new.php [L]
+
+# Если файл или директория существует, не выполнять перенаправление
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Перенаправление всех запросов к r.php
+RewriteRule ^(.*)$ r.php?url=$1 [L,QSA]

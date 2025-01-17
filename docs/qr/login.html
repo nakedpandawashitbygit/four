@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+   </head>
+<body>
+    <button onclick="window.location.href='index.php'">На главную</button>
+    <button onclick="window.location.href='register.html'">Зарегистрироваться</button>
+
+    <h1>Вход</h1>
+    <form id="loginForm">
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username" required autocomplete="username">
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+        <button type="submit">Войти</button>
+    </form>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Предотвращаем стандартное поведение формы
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            login(username, password); // Вызываем функцию входа
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+[2024-08-16 22:14:07 +0300] [327] [INFO] Starting gunicorn 23.0.0
+[2024-08-16 22:14:07 +0300] [327] [INFO] Listening at: http://0.0.0.0:8000 (327)
+[2024-08-16 22:14:07 +0300] [327] [INFO] Using worker: sync
+[2024-08-16 22:14:07 +0300] [329] [INFO] Booting worker with pid: 329
+[2024-08-16 22:30:49 +0300] [327] [INFO] Handling signal: hup
+[2024-08-16 22:30:49 +0300] [327] [INFO] Hang up: Master
+[2024-08-16 22:30:49 +0300] [327] [ERROR] Worker (pid:329) was sent SIGHUP!
+[2024-08-16 22:30:49 +0300] [327] [INFO] Handling signal: term
+[2024-08-16 22:30:49 +0300] [350] [INFO] Booting worker with pid: 350
+[2024-08-16 22:31:19 +0300] [327] [INFO] Shutting down: Master
