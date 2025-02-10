@@ -10,10 +10,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Настройки базы данных
 $site_url = "https://lnk.monster";
-$servername = "h406470147.mysql";
-$username = "h406470147_mysql";
-$password = "_ap8LTKB";
-$dbname = "h406470147_db";
+$servername = "4";
+$username = "4";
+$password = "4";
+$dbname = "4";
 
 $logging_enabled = true;
 $default_long_url_image_url = "/img/no-meta-img.png";
